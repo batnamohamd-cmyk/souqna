@@ -2,157 +2,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101827">
-<meta name="description" content="سوقنا منصة عربية للبيع والشراء والتحف والفنون والمواهب">
-<title>سوقنا | Souqna</title>
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: Tahoma, Arial, sans-serif;
-  background: #f4f6fa;
-  color: #172033;
-}
-header {
-  background: #101827;
-  color: white;
-  padding: 18px;
-}
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.avatar {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background: #d5aa43;
-  display: grid;
-  place-items: center;
-  font-size: 27px;
-  border: 3px solid white;
-}
-.crown {
-  color: #ffd34e;
-  font-size: 12px;
-}
-.logo {
-  font-size: 27px;
-  font-weight: bold;
-  color: #f4c44e;
-}
-.subtitle {
-  font-size: 12px;
-  color: #cbd5e1;
-  margin-top: 5px;
-}
-.search {
-  margin-top: 20px;
-  display: flex;
-  gap: 8px;
-}
-.search input {
-  flex: 1;
-  padding: 13px;
-  border: 0;
-  border-radius: 10px;
-  font-size: 15px;
-}
-.search button {
-  border: 0;
-  border-radius: 10px;
-  padding: 12px;
-  background: #e9b83f;
-  font-weight: bold;
-}
-main {
-  padding: 18px;
-  max-width: 900px;
-  margin: auto;
-}
-.welcome {
-  background: linear-gradient(120deg,#172b48,#275b78);
-  color: white;
-  padding: 25px;
-  border-radius: 18px;
-  margin-bottom: 22px;
-}
-.welcome h2 {
-  margin-bottom: 10px;
-}
-h3 {
-  margin: 22px 0 14px;
-}
-.categories {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 12px;
-}
-.category {
-  background: white;
-  padding: 20px 10px;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 3px 12px #0000000c;
-}
-.category span {
-  display: block;
-  font-size: 30px;
-  margin-bottom: 8px;
-}
-.products {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 12px;
-}
-.product {
-  background: white;
-  padding: 15px;
-  border-radius: 14px;
-  text-align: center;
-}
-.product .picture {
-  background: #e8edf5;
-  border-radius: 10px;
-  padding: 25px;
-  font-size: 35px;
-}
-.price {
-  color: #16865d;
-  font-weight: bold;
-  margin-top: 8px;
-}
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #64748b;
-}
-@media(min-width:650px) {
-  .categories,.products {
-    grid-template-columns: repeat(4,1fr);
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>سوقنا Souqna</title>
+
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="سوقنا منصة عربية للتجارة والفنون والمواهب">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
 
 <header>
   <div class="top">
     <div class="profile">
-      <div class="avatar">
-        👑
-      </div>
+      <div class="avatar">👑</div>
       <div>
         <div class="crown">صاحب المنصة</div>
         <div>مرحباً بك في سوقنا</div>
@@ -189,22 +56,25 @@ footer {
 
   <h3>منتجات مميزة</h3>
 
-  <section class="products" id="products">
+  <section class="products">
     <div class="product">
       <div class="picture">📱</div>
       <p>الهواتف والأجهزة</p>
       <div class="price">أضف إعلانك</div>
     </div>
+
     <div class="product">
       <div class="picture">🎨</div>
       <p>الأعمال الفنية</p>
       <div class="price">أضف إبداعك</div>
     </div>
+
     <div class="product">
       <div class="picture">🏺</div>
       <p>التحف النادرة</p>
       <div class="price">اكتشف المعروض</div>
     </div>
+
     <div class="product">
       <div class="picture">🚗</div>
       <p>السيارات</p>
@@ -218,17 +88,13 @@ footer {
   <p>التجارة والإبداع في مكان واحد</p>
 </footer>
 
+<script src="script.js"></script>
+
 <script>
-function searchItems() {
-  const value = document.getElementById("search")
-    .value.trim().toLowerCase();
-
-  const products = document.querySelectorAll(".product");
-
-  products.forEach(product => {
-    product.style.display =
-      product.innerText.toLowerCase().includes(value)
-      ? "" : "none";
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .catch(error => console.error(error));
   });
 }
 </script>
