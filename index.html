@@ -14,6 +14,25 @@
   <link rel="manifest" href="manifest.json">
 </head>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
+  // إعدادات مشروع سوقنا
+  const firebaseConfig = {
+    apiKey: "AIzaSyAWm2MFqlVyrkm0JJu57ndonHAkauFmKCg",
+    authDomain: "souqna-f2b54.firebaseapp.com",
+    projectId: "souqna-f2b54",
+    storageBucket: "souqna-f2b54.firebasestorage.app",
+    messagingSenderId: "920782136934",
+    appId: "1:920782136934:web:852598f06e21348baeafa7"
+  };
+
+  // تشغيل Firebase
+  const app = initializeApp(firebaseConfig);
+
+  console.log("Souqna Firebase Connected Successfully!");
+</script>
+
 <body>
 
 <header>
@@ -98,6 +117,21 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyAWm2MFqlVyrkm0JJu57ndonHAkauFmKCg",
+    authDomain: "souqna-f2b54.firebaseapp.com",
+    projectId: "souqna-f2b54",
+    storageBucket: "souqna-f2b54.firebasestorage.app",
+    messagingSenderId: "920782136934",
+    appId: "1:920782136934:web:852598f06e21348baeafa7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  console.log("Souqna Firebase connected!");
+</script>
 </body>
 </html>
