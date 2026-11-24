@@ -29,6 +29,56 @@ header {
   padding: 18px;
 }
 
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #ffffff18;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-size: 25px;
+}
+
+.crown {
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.logo {
+  color: var(--gold);
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.search {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  outline: none;
+}
+
 button {
   cursor: pointer;
   border: none;
@@ -37,23 +87,6 @@ button {
   background: var(--gold);
   color: var(--primary);
   font-weight: bold;
-  transition: 0.3s;
-}
-
-button:hover {
-  opacity: 0.85;
-  transform: translateY(-2px);
-}
-
-input {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 13px;
-  outline: none;
-}
-
-input:focus {
-  border-color: var(--secondary);
 }
 
 main {
@@ -63,22 +96,22 @@ main {
   padding: 20px;
 }
 
-.category,
-.product {
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
+.welcome {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
-.category:hover,
-.product:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px #00000015;
+h3 {
+  margin: 22px 0 14px;
 }
 
 .categories,
 .products {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -88,11 +121,41 @@ main {
   border-radius: 14px;
   padding: 18px;
   text-align: center;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #00000008;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.category:active,
+.product:active {
+  transform: scale(0.97);
+}
+
+.category:hover,
+.product:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #00000015;
+}
+
+.category span {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.picture {
+  font-size: 38px;
+  margin-bottom: 8px;
 }
 
 .price {
   color: var(--green);
   font-weight: bold;
+  margin-top: 5px;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 footer {
@@ -118,5 +181,9 @@ footer {
   .category,
   .product {
     padding: 12px;
+  }
+
+  .search button {
+    padding: 10px 13px;
   }
 }
