@@ -1,28 +1,20 @@
+
 "use strict";
 
-// البحث في المنتجات والأقسام
+let selectedCategory = "";
+
+// البحث في الأقسام والمنتجات
 function searchItems() {
+  selectedCategory = "";
+
   const searchInput = document.getElementById("search");
-  if (!searchInput) return;
+  const value = searchInput ? searchInput.value.trim().toLowerCase() : "";
 
-  const value = searchInput.value.trim().toLowerCase();
-
-  document.querySelectorAll(".product, .category").forEach(item => {
+  document.querySelectorAll(".category, .product").forEach(item => {
     const content = item.textContent.toLowerCase();
-    item.style.display = content.includes(value) ? "" : "none";
+    item.hidden = value !== "" && !content.includes(value);
   });
 }
-
-// تفعيل البحث
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("search");
-
-  if (searchInput) {
-    searchInput.addEventListener("input", searchItems);
-  }
-
-  console.log("مرحباً بك في سوقنا Souqna");
-});
 
 // اختيار قسم
 function selectCategory(category) {
@@ -32,21 +24,60 @@ function selectCategory(category) {
     searchInput.value = "";
   }
 
-  document.querySelectorAll(".category").forEach(item => {
-    item.style.display = "";
+  const chosen = category.trim();
+
+  // استخراج رمز القسم
+  const categories = document.querySelectorAll(".category");
+  let selectedIcon = "";
+
+  categories.forEach(item => {
+    const name = item.textContent.trim();
+
+    if (name.includes(chosen)) {
+      const icon = item.querySelector("span");
+      if (icon) selectedIcon = icon.textContent.trim();
+    }
   });
 
-  document.querySelectorAll(".product").forEach(product => {
-    const content = product.textContent.toLowerCase();
+  // إظهار جميع الأقسام
+  categories.forEach(item => {
+    item.hidden = false;
+  });
 
-    product.style.display =
-      content.includes(category.toLowerCase()) ? "" : "none";
+  // إظهار المنتجات التي تحمل رمز القسم نفسه
+  document.querySelectorAll(".product").forEach(product => {
+    const picture = product.querySelector(".picture");
+    const productIcon = picture ? picture.textContent.trim() : "";
+
+    product.hidden =
+      !selectedIcon || productIcon !== selectedIcon;
   });
 
   document.querySelector(".products").scrollIntoView({
     behavior: "smooth"
   });
 }
+
+// إتاحة الدوال لأزرار الصفحة
+window.searchItems = searchItems;
+window.selectCategory = selectCategory;
+
+// تشغيل البحث وربط الأقسام
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("search");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", searchItems);
+  }
+
+  document.querySelectorAll(".category").forEach(item => {
+    item.addEventListener("click", () => {
+      selectCategory(item.textContent.trim());
+    });
+  });
+
+  console.log("Souqna is ready!");
+});
 
 // الانتقال إلى أعلى الصفحة
 function scrollToTop() {
