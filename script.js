@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // عرض رسالة ترحيبية في وحدة التحكم
   console.log("مرحباً بك في سوقنا Souqna");
-});
 
 // عرض رسالة عند اختيار قسم
 function selectCategory(category) {
