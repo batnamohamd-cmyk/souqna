@@ -9,7 +9,6 @@ function searchItems() {
     const content = item.textContent.toLowerCase();
     item.style.display = content.includes(value) ? "" : "none";
   });
-}
 // تفعيل البحث عند الضغط على زر الإدخال
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search");
