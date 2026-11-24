@@ -1,14 +1,17 @@
 
 "use strict";
 
+// القسم المختار حالياً
 let selectedCategory = "";
 
-// البحث في الأقسام والمنتجات
+// البحث في المنتجات والأقسام
 function searchItems() {
   selectedCategory = "";
 
   const searchInput = document.getElementById("search");
-  const value = searchInput ? searchInput.value.trim().toLowerCase() : "";
+  const value = searchInput
+    ? searchInput.value.trim().toLowerCase()
+    : "";
 
   document.querySelectorAll(".category, .product").forEach(item => {
     const content = item.textContent.toLowerCase();
@@ -24,45 +27,45 @@ function selectCategory(category) {
     searchInput.value = "";
   }
 
-  const chosen = category.trim();
-
-  // استخراج رمز القسم
-  const categories = document.querySelectorAll(".category");
-  let selectedIcon = "";
-
-  categories.forEach(item => {
-    const name = item.textContent.trim();
-
-    if (name.includes(chosen)) {
-      const icon = item.querySelector("span");
-      if (icon) selectedIcon = icon.textContent.trim();
-    }
-  });
+  selectedCategory = category.trim().toLowerCase();
 
   // إظهار جميع الأقسام
-  categories.forEach(item => {
+  document.querySelectorAll(".category").forEach(item => {
     item.hidden = false;
   });
 
-  // إظهار المنتجات التي تحمل رمز القسم نفسه
+  // إظهار المنتجات المطابقة للقسم
   document.querySelectorAll(".product").forEach(product => {
-    const picture = product.querySelector(".picture");
-    const productIcon = picture ? picture.textContent.trim() : "";
+    const content = product.textContent.toLowerCase();
 
-    product.hidden =
-      !selectedIcon || productIcon !== selectedIcon;
+    product.hidden = !content.includes(selectedCategory);
   });
 
-  document.querySelector(".products").scrollIntoView({
-    behavior: "smooth"
-  });
+  const productsSection = document.querySelector(".products");
+
+  if (productsSection) {
+    productsSection.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
 }
 
-// إتاحة الدوال لأزرار الصفحة
-window.searchItems = searchItems;
-window.selectCategory = selectCategory;
+// إظهار جميع المنتجات والأقسام
+function showAll() {
+  selectedCategory = "";
 
-// تشغيل البحث وربط الأقسام
+  document.querySelectorAll(".category, .product").forEach(item => {
+    item.hidden = false;
+  });
+
+  const searchInput = document.getElementById("search");
+
+  if (searchInput) {
+    searchInput.value = "";
+  }
+}
+
+// تشغيل الموقع
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search");
 
@@ -79,6 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Souqna is ready!");
 });
 
+// إتاحة الدوال لصفحة HTML
+window.searchItems = searchItems;
+window.selectCategory = selectCategory;
+window.showAll = showAll;
+
 // الانتقال إلى أعلى الصفحة
 function scrollToTop() {
   window.scrollTo({
@@ -94,3 +102,6 @@ function aboutSouqna() {
     "منصة تجمع التجارة والفنون والمواهب."
   );
 }
+
+window.scrollToTop = scrollToTop;
+window.aboutSouqna = aboutSouqna;
