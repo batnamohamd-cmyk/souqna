@@ -24,7 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // عرض رسالة عند اختيار قسم
 function selectCategory(category) {
-  alert("مرحباً بك في قسم " + category);
+  const products = document.querySelectorAll(".product");
+
+  products.forEach(product => {
+    const content = product.textContent.toLowerCase();
+
+    product.style.display =
+      content.includes(category.toLowerCase()) ? "" : "none";
+  });
+
+  document.querySelector(".products").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
 }
 
 // الانتقال إلى أعلى الصفحة
