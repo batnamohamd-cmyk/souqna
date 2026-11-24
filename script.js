@@ -1,23 +1,15 @@
-
-"use strict";
-
-// البحث عن المنتجات
+// البحث في المنتجات والأقسام
 function searchItems() {
   const searchInput = document.getElementById("search");
-
   if (!searchInput) return;
 
   const value = searchInput.value.trim().toLowerCase();
-  const products = document.querySelectorAll(".product");
 
-  products.forEach(product => {
-    const content = product.textContent.toLowerCase();
-
-    product.style.display =
-      content.includes(value) ? "" : "none";
+  document.querySelectorAll(".product, .category").forEach(item => {
+    const content = item.textContent.toLowerCase();
+    item.style.display = content.includes(value) ? "" : "none";
   });
 }
-
 // تفعيل البحث عند الضغط على زر الإدخال
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search");
