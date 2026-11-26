@@ -1,4 +1,4 @@
-تع
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -14,29 +14,11 @@
   <link rel="manifest" href="manifest.json">
 </head>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-
-  // إعدادات مشروع سوقنا
-  const firebaseConfig = {
-    apiKey: "AIzaSyAWm2MFqlVyrkm0JJu57ndonHAkauFmKCg",
-    authDomain: "souqna-f2b54.firebaseapp.com",
-    projectId: "souqna-f2b54",
-    storageBucket: "souqna-f2b54.firebasestorage.app",
-    messagingSenderId: "920782136934",
-    appId: "1:920782136934:web:852598f06e21348baeafa7"
-  };
-
-  // تشغيل Firebase
-  const app = initializeApp(firebaseConfig);
-
-  console.log("Souqna Firebase Connected Successfully!");
-</script>
-
 <body>
 
 <header>
   <div class="top">
+
     <div class="profile">
       <div class="avatar">👑</div>
       <div>
@@ -44,40 +26,31 @@
         <div>مرحباً بك في سوقنا</div>
       </div>
     </div>
-    <div class="logo">سوقنا</div><section id="accountBox" hidden>
-  <h2>حسابي في سوقنا</h2>
 
-  <input id="userName" type="text" placeholder="الاسم الكامل">
+    <div class="logo">سوقنا</div>
 
-  <input id="userEmail" type="email" placeholder="البريد الإلكتروني">
+    <button id="accountButton" type="button">
+      👤 حسابي
+    </button>
 
-  <input id="userPassword" type="password" placeholder="كلمة المرور">
-
-  <button id="registerButton" type="button">إنشاء حساب</button>
-
-  <button id="loginButton" type="button">تسجيل الدخول</button>
-
-  <button id="logoutButton" type="button" hidden>تسجيل الخروج</button>
-
-  <p id="accountMessage"></p>
-
-  <button id="closeAccount" type="button">إغلاق</button>
-</section>
   </div>
 
   <div class="search">
-    <input id="search" type="search"
-    placeholder="ابحث عن منتج أو خدمة...">
+    <input
+      id="search"
+      type="search"
+      placeholder="ابحث عن منتج أو خدمة..."
+    >
     <button onclick="searchItems()">بحث</button>
   </div>
 </header>
 
 <main>
+
   <section class="welcome">
     <h2>أهلاً بك في سوقنا</h2>
     <p>عالم واحد يجمع التجارة والإبداع والمواهب.</p>
-  </sect
-    ion>
+  </section>
 
   <h3>أقسام سوقنا</h3>
 
@@ -86,7 +59,9 @@
     <div class="category"><span>🏺</span>التحف والآثار</div>
     <div class="category"><span>🎨</span>الفنون والإبداع</div>
     <div class="category"><span>🌟</span>المواهب</div>
-    <div class="category" onclick="selectCategory('السيارات')"><span>🚗</span>السيارات</div>
+    <div class="category" onclick="selectCategory('السيارات')">
+      <span>🚗</span>السيارات
+    </div>
     <div class="category"><span>🏠</span>العقارات</div>
     <div class="category"><span>📱</span>الإلكترونيات</div>
     <div class="category"><span>🧰</span>الخدمات</div>
@@ -95,6 +70,7 @@
   <h3>منتجات مميزة</h3>
 
   <section class="products">
+
     <div class="product">
       <div class="picture">📱</div>
       <p>الهواتف والأجهزة</p>
@@ -118,8 +94,58 @@
       <p>السيارات</p>
       <div class="price">اكتشف العروض</div>
     </div>
+
   </section>
+
 </main>
+
+<!-- نافذة حساب المستخدم -->
+<section id="accountBox" hidden>
+
+  <h2>حسابي في سوقنا</h2>
+
+  <p id="accountStatus">مرحباً بك في سوقنا</p>
+
+  <label for="userName">الاسم الكامل</label>
+  <input
+    id="userName"
+    type="text"
+    placeholder="اكتب اسمك"
+  >
+
+  <label for="userEmail">البريد الإلكتروني</label>
+  <input
+    id="userEmail"
+    type="email"
+    placeholder="البريد الإلكتروني"
+  >
+
+  <label for="userPassword">كلمة المرور</label>
+  <input
+    id="userPassword"
+    type="password"
+    placeholder="كلمة المرور"
+  >
+
+  <button id="registerButton" type="button">
+    إنشاء حساب جديد
+  </button>
+
+  <button id="loginButton" type="button">
+    تسجيل الدخول
+  </button>
+
+  <button id="logoutButton" type="button" hidden>
+    تسجيل الخروج
+  </button>
+
+  <p id="accountMessage" aria-live="polite"></p>
+
+  <button id="closeAccount" type="button">
+    إغلاق
+  </button>
+
+</section>
 
 <footer>
   سوقنا Souqna © 2026
@@ -128,13 +154,220 @@
 
 <script src="script.js"></script>
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js")
-      .catch(error => console.error(error));
+<!-- Firebase Authentication و Cloud Firestore -->
+<script type="module">
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+
+  // إعدادات مشروع سوقنا
+  const firebaseConfig = {
+    apiKey: "AIzaSyAWm2MFqlVyrkm0JJu57ndonHAkauFmKCg",
+    authDomain: "souqna-f2b54.firebaseapp.com",
+    projectId: "souqna-f2b54",
+    storageBucket: "souqna-f2b54.firebasestorage.app",
+    messagingSenderId: "920782136934",
+    appId: "1:920782136934:web:852598f06e21348baeafa7"
+  };
+
+  // تشغيل Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // عناصر واجهة الحساب
+  const accountButton = document.getElementById("accountButton");
+  const accountBox = document.getElementById("accountBox");
+  const userName = document.getElementById("userName");
+  const userEmail = document.getElementById("userEmail");
+  const userPassword = document.getElementById("userPassword");
+
+  const registerButton = document.getElementById("registerButton");
+  const loginButton = document.getElementById("loginButton");
+  const logoutButton = document.getElementById("logoutButton");
+  const closeAccount = document.getElementById("closeAccount");
+
+  const accountMessage = document.getElementById("accountMessage");
+  const accountStatus = document.getElementById("accountStatus");
+
+  // إظهار وإغلاق نافذة الحساب
+  accountButton.addEventListener("click", () => {
+    accountBox.hidden = !accountBox.hidden;
   });
-}
+
+  closeAccount.addEventListener("click", () => {
+    accountBox.hidden = true;
+  });
+
+  // إنشاء حساب جديد
+  registerButton.addEventListener("click", async () => {
+
+    const name = userName.value.trim();
+    const email = userEmail.value.trim();
+    const password = userPassword.value;
+
+    if (!name || !email || !password) {
+      accountMessage.textContent =
+        "يرجى إدخال الاسم والبريد الإلكتروني وكلمة المرور.";
+      return;
+    }
+
+    if (password.length < 6) {
+      accountMessage.textContent =
+        "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.";
+      return;
+    }
+
+    registerButton.disabled = true;
+    accountMessage.textContent = "جارٍ إنشاء الحساب...";
+
+    try {
+
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = result.user;
+
+      // حفظ بيانات المستخدم في Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: name,
+        email: user.email,
+        createdAt: serverTimestamp()
+      });
+
+      accountMessage.textContent =
+        "تم إنشاء حسابك وحفظ بياناتك بنجاح!";
+
+    } catch (error) {
+
+      accountMessage.textContent =
+        "حدث خطأ: " + error.message;
+
+    } finally {
+
+      registerButton.disabled = false;
+
+    }
+
+  });
+
+  // تسجيل الدخول
+  loginButton.addEventListener("click", async () => {
+
+    const email = userEmail.value.trim();
+    const password = userPassword.value;
+
+    if (!email || !password) {
+      accountMessage.textContent =
+        "أدخل البريد الإلكتروني وكلمة المرور.";
+      return;
+    }
+
+    loginButton.disabled = true;
+    accountMessage.textContent = "جارٍ تسجيل الدخول...";
+
+    try {
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      accountMessage.textContent =
+        "تم تسجيل الدخول بنجاح.";
+
+    } catch (error) {
+
+      accountMessage.textContent =
+        "تعذر تسجيل الدخول: " + error.message;
+
+    } finally {
+
+      loginButton.disabled = false;
+
+    }
+
+  });
+
+  // تسجيل الخروج
+  logoutButton.addEventListener("click", async () => {
+
+    try {
+
+      await signOut(auth);
+      accountMessage.textContent = "تم تسجيل الخروج.";
+
+    } catch (error) {
+
+      accountMessage.textContent =
+        "حدث خطأ: " + error.message;
+
+    }
+
+  });
+
+  // متابعة حالة المستخدم
+  onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+
+      accountStatus.textContent =
+        "أهلاً بك، " + (user.displayName || user.email);
+
+      accountButton.textContent = "👤 حسابي";
+
+      registerButton.hidden = true;
+      loginButton.hidden = true;
+      logoutButton.hidden = false;
+
+      userName.hidden = true;
+
+    } else {
+
+      accountStatus.textContent = "مرحباً بك في سوقنا";
+
+      registerButton.hidden = false;
+      loginButton.hidden = false;
+      logoutButton.hidden = true;
+
+      userName.hidden = false;
+
+    }
+
+  });
+
+  console.log("Souqna Firebase is ready!");
+
 </script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js")
+        .catch(error => console.error(error));
+    });
+  }
+</script>
+
 </body>
 </html>
