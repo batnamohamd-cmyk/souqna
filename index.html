@@ -435,6 +435,20 @@ console.log("Souqna Firebase initialized successfully.");
 
 </script>
 
+<script>
+  const accountButton = document.getElementById("accountButton");
+  const accountBox = document.getElementById("accountBox");
+  const closeAccount = document.getElementById("closeAccount");
+
+  accountButton.addEventListener("click", () => {
+    accountBox.hidden = !accountBox.hidden;
+  });
+
+  closeAccount.addEventListener("click", () => {
+    accountBox.hidden = true;
+  });
+</script>
+
 <!-- Service Worker -->
 
 <script>
