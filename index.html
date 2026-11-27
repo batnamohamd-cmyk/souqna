@@ -36,8 +36,11 @@
   </div>
 
   <div class="search">
-    <input id="search" type="search"
-      placeholder="ابحث عن منتج أو خدمة...">
+    <input
+      id="search"
+      type="search"
+      placeholder="ابحث عن منتج أو خدمة..."
+    >
     <button type="button" onclick="searchItems()">بحث</button>
   </div>
 </header>
@@ -103,16 +106,28 @@
   <p id="accountStatus">مرحباً بك في سوقنا</p>
 
   <label for="userName">الاسم الكامل</label>
-  <input id="userName" type="text"
-    placeholder="اكتب اسمك" autocomplete="name">
+  <input
+    id="userName"
+    type="text"
+    placeholder="اكتب اسمك"
+    autocomplete="name"
+  >
 
   <label for="userEmail">البريد الإلكتروني</label>
-  <input id="userEmail" type="email"
-    placeholder="البريد الإلكتروني" autocomplete="email">
+  <input
+    id="userEmail"
+    type="email"
+    placeholder="البريد الإلكتروني"
+    autocomplete="email"
+  >
 
   <label for="userPassword">كلمة المرور</label>
-  <input id="userPassword" type="password"
-    placeholder="كلمة المرور" autocomplete="current-password">
+  <input
+    id="userPassword"
+    type="password"
+    placeholder="كلمة المرور"
+    autocomplete="current-password"
+  >
 
   <button id="registerButton" type="button">
     إنشاء حساب جديد
@@ -200,9 +215,10 @@ const closeAccount = document.getElementById("closeAccount");
 const accountMessage = document.getElementById("accountMessage");
 const accountStatus = document.getElementById("accountStatus");
 
-// رسائل الأخطاء بالعربية
+// رسائل الأخطاء
 
 function friendlyError(error) {
+
   const errors = {
     "auth/email-already-in-use":
       "هذا البريد الإلكتروني مسجل بالفعل.",
@@ -243,7 +259,7 @@ closeAccount.addEventListener("click", () => {
   accountBox.hidden = true;
 });
 
-// إنشاء حساب
+// إنشاء حساب جديد
 
 registerButton.addEventListener("click", async () => {
 
@@ -276,7 +292,7 @@ registerButton.addEventListener("click", async () => {
 
     const user = result.user;
 
-    // إضافة اسم المستخدم إلى حساب Firebase
+    // حفظ اسم المستخدم في Firebase Authentication
 
     await updateProfile(user, {
       displayName: name
