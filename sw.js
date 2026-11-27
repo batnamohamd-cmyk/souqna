@@ -1,5 +1,4 @@
-
-const CACHE_NAME = "souqna-cache-v3";
+souqna-cache-v4
 
 const FILES_TO_CACHE = [
   "./",
